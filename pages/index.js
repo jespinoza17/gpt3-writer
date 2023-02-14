@@ -7,7 +7,6 @@ const Home = () => {
   const [userInput, setUserInput] = useState('');
   const [apiOutput, setApiOutput] = useState('');
   const [isGenerating, setIsGenerating] = useState(false);
-  const [isLightMode, setIsLightMode] = useState(true);
 
   const callGenerateEndpoint = async () => {
     setIsGenerating(true);
