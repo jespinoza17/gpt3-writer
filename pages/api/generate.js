@@ -1,29 +1,32 @@
 import { Configuration, OpenAIApi } from "openai";
+import { OpenAIStream } from "../../utils/OpenAIStream"
 
-const config = new Configuration({
+export const config = {
+  runtime: 'edge',
+}
+const openaiConfig = new Configuration({
   apiKey: process.env.OPENAI_API_KEY,
 });
 
-const openai = new OpenAIApi(config);
+const openai = new OpenAIApi(openaiConfig);
 
-const basePromptPrefix = `Write a speech by Naruto Uzumaki to motivate someone in this situation: `;
+const basePromptPrefix = `Write an anime plot about the following: `;
 
-const generateAction = async (req, res) => {
-  console.log(`API: ${basePromptPrefix}${req.body.userInput}`);
+// update this to an edge function
+const generateAction = async (req) => {
+  const { userInput } = await req.json();
+  console.log(`API: ${basePromptPrefix}${userInput}`);
 
-  //call the api
-  const baseCompletion = await openai.createCompletion({
+  const payload = {
     model: 'text-davinci-003',
-    prompt: `${basePromptPrefix}${req.body.userInput}\n`,
+    prompt: `${basePromptPrefix}${userInput}\n`,
     temperature: 0.9,
     max_tokens: 500,
-  });
+    stream: true,
+  };
 
-  // second api call for prompt chainging (if needed)
-
-  const basePromptOutput = baseCompletion.data.choices.pop();
-
-  res.status(200).json({output: basePromptOutput});
+  const stream = await OpenAIStream(payload);
+  return new Response(stream);
 };
 
 export default generateAction;

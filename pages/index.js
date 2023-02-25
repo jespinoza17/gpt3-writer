@@ -8,8 +8,9 @@ const Home = () => {
   const [apiOutput, setApiOutput] = useState('');
   const [isGenerating, setIsGenerating] = useState(false);
 
-  const callGenerateEndpoint = async () => {
+  const callGenerateEndpoint = async (e) => {
     setIsGenerating(true);
+    e.preventDefault();
 
     const response = await fetch('/api/generate', {
       method: 'POST',
@@ -18,10 +19,26 @@ const Home = () => {
       },
       body: JSON.stringify({ userInput }),
     });
-    const data = await response.json();
-    const { output } = data;
+    if (!response.ok) {
+      throw new Error(response.statusText);
+    }
 
-    setApiOutput(`${output.text}`);
+    const data = response.body;
+    if(!data) {
+      return;
+    }
+    const reader = data.getReader();
+    const decoder = new TextDecoder();
+    let done = false;
+
+    while(!done) {
+      // destructure
+      const { value, done: doneReading } = await reader.read();
+      done = doneReading;
+      const chunkValue = decoder.decode(value);
+      setApiOutput((prev) => prev + chunkValue);
+    }
+
     setIsGenerating(false);
   };
 
@@ -37,16 +54,16 @@ const Home = () => {
       <div className="container">
         <div className="header">
           <div className="header-title">
-            <h1>Naruto motivational quote generator</h1>
+            <h1>Anime plot Generator</h1>
           </div>
           <div className="header-subtitle">
-            <h2>come get inspired by the 7th hokage!</h2>
+            <h2>Generate a plot for a new anime!</h2>
           </div>
         </div>
         <div className="prompt-container">
           <textarea
             className="prompt-box"
-            placeholder="what do you need motivation for?"
+            placeholder="what is your cool story about?"
             value={userInput}
             onChange={onUserChangedText}
           />;
