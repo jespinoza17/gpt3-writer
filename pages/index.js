@@ -9,8 +9,9 @@ const Home = () => {
   const [isGenerating, setIsGenerating] = useState(false);
 
   const callGenerateEndpoint = async (e) => {
-    setIsGenerating(true);
     e.preventDefault();
+    setApiOutput('');
+    setIsGenerating(true);
 
     const response = await fetch('/api/generate', {
       method: 'POST',
@@ -66,7 +67,7 @@ const Home = () => {
             placeholder="what is your cool story about?"
             value={userInput}
             onChange={onUserChangedText}
-          />;
+          />
           <div className="prompt-buttons">
             <a className={isGenerating ? 'generate-button loading' : 'generate-button'} onClick={callGenerateEndpoint}>
               <div className="generate">
