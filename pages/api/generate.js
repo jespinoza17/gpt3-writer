@@ -10,18 +10,19 @@ const openaiConfig = new Configuration({
 
 const openai = new OpenAIApi(openaiConfig);
 
+// update prompt to add character name
 const basePromptPrefix = `Write an anime plot about the following: `;
 
 // update this to an edge function
 const generateAction = async (req) => {
   const { userInput } = await req.json();
   console.log(`API: ${basePromptPrefix}${userInput}`);
-
+  const messages = [{ role: 'user', content: `${basePromptPrefix}${userInput}`}];
+  
   const payload = {
-    model: 'text-davinci-003',
-    prompt: `${basePromptPrefix}${userInput}\n`,
+    model: 'gpt-3.5-turbo',
+    messages: messages,
     temperature: 0.9,
-    max_tokens: 500,
     stream: true,
   };
 

@@ -47,15 +47,16 @@ const Home = () => {
     setUserInput(event.target.value);
   };
 
+  // update to specify the anime character name will be included as well
   return (
     <div className={"root"}>
       <Head>
-        <title>GPT-3 Writer | Naruto</title>
+        <title>Anime Story Writer</title>
       </Head>
       <div className="container">
         <div className="header">
           <div className="header-title">
-            <h1>Anime plot Generator</h1>
+            <h1>Anime Story Writer</h1>
           </div>
           <div className="header-subtitle">
             <h2>Generate a plot for a new anime!</h2>
