@@ -13,7 +13,6 @@ const openai = new OpenAIApi(openaiConfig);
 // update prompt to add character name
 const basePromptPrefix = `Write an anime plot about the following: `;
 
-// update this to an edge function
 const generateAction = async (req) => {
   const { userInput } = await req.json();
   console.log(`API: ${basePromptPrefix}${userInput}`);

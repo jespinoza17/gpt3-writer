@@ -47,7 +47,6 @@ const Home = () => {
     setUserInput(event.target.value);
   };
 
-  // update to specify the anime character name will be included as well
   return (
     <div className={"root"}>
       <Head>
