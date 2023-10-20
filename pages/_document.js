@@ -8,7 +8,7 @@ export default function Document() {
         <meta property="og:description" content="build with buildspace" key="description"/>
         <meta
           property="og:image"
-          content="https://www.cartoonbucket.com/wp-content/uploads/2017/04/Naruto-Holding-Stick-600x450.jpg"
+          content="https://i.imgur.com/Qs96N4o.png"
         />
         <meta name="twitter:card" content="summary_large_image"></meta>
       </Head>
