@@ -280,34 +280,14 @@ textarea {
     overflow: hidden;
     position: relative;
     width: 100%;
-}
-
-.output-header-container {
-    place-content: center;
-    align-items: center;
-    display: flex;
-    flex: 0 0 auto;
-    flex-flow: column nowrap;
-    gap: 16px;
-    height: min-content;
-    overflow: hidden;
-    padding: 0px;
-    position: relative;
-    width: 100%;
-}
-
-.output-header h3 {
-    font-family: "Manrope", serif;
-    font-size: 28px;
-    font-style: normal;
-    font-weight: 800;
-    letter-spacing: 0px;
-    line-height: 1.4em;
-    text-align: start;
-    color: #ffffff;
-    text-decoration: none;
-    text-transform: none;
-    margin: 0;
+    border-bottom-width: 1px;
+    border-color: rgba(255, 255, 255, 0.1);
+    border-left-width: 1px;
+    border-right-width: 1px;
+    border-style: solid;
+    border-top-width: 1px;
+    background-color: rgba(43, 43, 43, 0.05);
+    border-radius: 16px;
 }
 
 .output-content {
